@@ -47,7 +47,10 @@ public class GetterEmployees implements RequestHandler<APIGatewayProxyRequestEve
             String responseBodyString = "[\n";
             Iterator<Item> iterator = items.iterator();
             while(iterator.hasNext()){
-                responseBodyString += iterator.next().toJSONPretty() + ", ";
+                responseBodyString += iterator.next().toJSONPretty() + ",";
+            }
+            if(responseBodyString.charAt(responseBodyString.length() - 1) == ','){
+                responseBodyString = responseBodyString.substring(0, responseBodyString.length() - 1);
             }
             responseBodyString += "\n]";
             if(responseBodyString.length() > 0 ){

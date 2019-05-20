@@ -94,7 +94,7 @@ public class Record implements RequestHandler<APIGatewayProxyRequestEvent, APIGa
                 .withString("DateOfEmployment", dateOfEmployment)
                 // .withStringSet("Authors", new HashSet<String>(Arrays.asList("Author12", "Author22")))
                 // .withNumber("Price", 20).withString("Dimensions", "8.5x11.0x.75").withNumber("PageCount", 500)
-                .withBoolean("Status", true);
+                .withString("Status", "ACTIVE");
             table.putItem(item);
 
             // String greeting = "Good " + time + ", " + name + " of " + city + ".";

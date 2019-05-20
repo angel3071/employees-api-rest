@@ -10,7 +10,7 @@ Resources:
   GetEmployee:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.angel.employees.Getter
+      Handler: com.angel.employees.GetterEmployee
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
       MemorySize: 256
@@ -26,6 +26,25 @@ Resources:
              RestApiId: !Ref EmployeesBackend
              Path: /Employee/{id}
              Method: GET
+  GetEmployees:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.angel.employees.GetterEmployees
+      Runtime: java8
+      CodeUri: build/distributions/employees-api-rest.zip
+      MemorySize: 256
+      Timeout: 10
+      Policies: AmazonDynamoDBFullAccess
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref Employees
+      Events:
+        EmployeesBackend:
+          Type: Api
+          Properties:
+            RestApiId: !Ref EmployeesBackend
+            Path: /Employee
+            Method: GET
   WriteEmployee:
     Type: AWS::Serverless::Function
     Properties:

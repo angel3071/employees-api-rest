@@ -29,9 +29,11 @@ Resources:
   WriteEmployee:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.angel.employees.Proxy
+      Handler: com.angel.employees.Record
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
+      MemorySize: 256
+      Timeout: 10
       Policies: AmazonDynamoDBFullAccess
       Environment:
         Variables:
@@ -80,6 +82,7 @@ Resources:
   Employees: 
     Type: AWS::Serverless::SimpleTable
     Properties: 
+      TableName: Employees
       PrimaryKey:
         Name: Id
         Type: String

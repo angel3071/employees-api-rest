@@ -3,6 +3,9 @@ package com.angel.employees;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+import java.util.Arrays;
+import java.util.HashSet;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,8 +18,18 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 
 
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.Table;
 
 public class Record implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+
+    static AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().build();
+    static DynamoDB dynamoDB = new DynamoDB(client);
+
+    static String tableName = "Employees";
 
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
@@ -32,8 +45,10 @@ public class Record implements RequestHandler<APIGatewayProxyRequestEvent, APIGa
         // String time = "day";
         // String day = null;
         String firstName, middleInitial, lastName, dateOfBirth, dateOfEmployment;
+        firstName = middleInitial = lastName = dateOfBirth = dateOfEmployment = "";
 
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
+        Table table = dynamoDB.getTable(tableName);
 
         try {
             // Map<String, String> qps = event.getQueryStringParameters();
@@ -73,6 +88,17 @@ public class Record implements RequestHandler<APIGatewayProxyRequestEvent, APIGa
                     dateOfEmployment = (String) body.get("dateOfEmployment");
                 }
             }
+
+            Item item = new Item().withPrimaryKey("Id", UUID.randomUUID().toString())
+                .withString("FirstName", firstName)
+                .withString("MiddleInitial", middleInitial)
+                .withString("LastName", lastName)
+                .withString("DateOfBirth", dateOfBirth)
+                .withString("DateOfEmployment", dateOfEmployment)
+                // .withStringSet("Authors", new HashSet<String>(Arrays.asList("Author12", "Author22")))
+                // .withNumber("Price", 20).withString("Dimensions", "8.5x11.0x.75").withNumber("PageCount", 500)
+                .withBoolean("Status", true);
+            table.putItem(item);
 
             // String greeting = "Good " + time + ", " + name + " of " + city + ".";
             // if (day != null && day != "")

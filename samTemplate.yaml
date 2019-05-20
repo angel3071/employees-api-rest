@@ -1,0 +1,93 @@
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Este es el stack de la consola web que acompana al bot
+Resources: 
+  EmployeesBackend:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+  # GetHotel:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     Handler: hotels.getHotel
+  #     Runtime: nodejs8.10
+  #     CodeUri: src/
+  #     Policies: AmazonDynamoDBFullAccess
+  #       # - DynamoDBReadPolicy:
+  #       #   TableName: !Ref Hotels
+  #     Environment:
+  #       Variables:
+  #         TABLE_NAME: !Ref Hotels
+  #     Events:
+  #       HotelChatbotBackend:
+  #         Type: Api
+  #         Properties:
+  #           RestApiId: !Ref HotelChatbotBackend
+  #           Path: /Hotel/{hotelId}
+  #           Method: GET
+  WriteEmployee:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.angel.employees.Proxy
+      Runtime: java8
+      CodeUri: build/distributions/employees-api-rest.zip
+      Policies: AmazonDynamoDBFullAccess
+      Environment:
+        Variables:
+            TABLE_NAME: !Ref Employees
+      Events:
+        EmployeesBackend:
+          Type: Api
+          Properties:
+            RestApiId: !Ref EmployeesBackend
+            Path: /Employee
+            Method: POST
+  # UpdateHotel:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     Handler: hotels.updateHotel
+  #     Runtime: nodejs8.10
+  #     CodeUri: src/
+  #     Policies: AmazonDynamoDBFullAccess
+  #     Environment:
+  #       Variables:
+  #           TABLE_NAME: !Ref Hotels
+  #     Events:
+  #       HotelChatbotBackend:
+  #         Type: Api
+  #         Properties:
+  #           RestApiId: !Ref HotelChatbotBackend
+  #           Path: /Hotel/{hotelId}
+  #           Method: PUT
+  # DeleteHotel:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     Handler: hotels.deleteHotel
+  #     Runtime: nodejs8.10
+  #     CodeUri: src/
+  #     Policies: AmazonDynamoDBFullAccess
+  #     Environment:
+  #       Variables:
+  #           TABLE_NAME: !Ref Hotels
+  #     Events:
+  #       HotelChatbotBackend:
+  #         Type: Api
+  #         Properties:
+  #           RestApiId: !Ref HotelChatbotBackend
+  #           Path: /Hotel/{hotelId}
+  #           Method: DELETE
+  Employees: 
+    Type: AWS::Serverless::SimpleTable
+    Properties: 
+      PrimaryKey:
+        Name: Id
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+Outputs:
+  ApiURL:
+    Description: "API endpoint URL for Prod environment"
+    Value: !Sub 'https://${EmployeesBackend}.execute-api.${AWS::Region}.amazonaws.com/Prod/'
+

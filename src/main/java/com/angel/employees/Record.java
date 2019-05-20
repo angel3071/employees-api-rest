@@ -1,35 +1,31 @@
 package com.angel.employees;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-import java.util.Arrays;
-import java.util.HashSet;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
-import com.amazonaws.services.dynamodbv2.document.Item;
-import com.amazonaws.services.dynamodbv2.document.Table;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class Record implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     static AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().build();
     static DynamoDB dynamoDB = new DynamoDB(client);
 
-    static String tableName = "Employees";
+    static String tableName = System.getenv("TABLE_NAME");
 
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
@@ -89,7 +85,8 @@ public class Record implements RequestHandler<APIGatewayProxyRequestEvent, APIGa
                 }
             }
 
-            Item item = new Item().withPrimaryKey("Id", UUID.randomUUID().toString())
+            String id = UUID.randomUUID().toString();
+            Item item = new Item().withPrimaryKey("Id", id)
                 .withString("FirstName", firstName)
                 .withString("MiddleInitial", middleInitial)
                 .withString("LastName", lastName)
@@ -109,7 +106,7 @@ public class Record implements RequestHandler<APIGatewayProxyRequestEvent, APIGa
 
             Map<String, String> responseBody = new HashMap<String, String>();
             // responseBody.put("input", event.toString());
-            responseBody.put("message", "Successful employee creation!");
+            responseBody.put("message", String.format("Successful employee creation with Id: %s", id));
             String responseBodyString = new JSONObject(responseBody).toJSONString();
 
             response.setBody(responseBodyString);

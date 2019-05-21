@@ -83,23 +83,25 @@ Resources:
             RestApiId: !Ref EmployeesBackend
             Path: /Employee/{id}
             Method: DELETE
-  # UpdateHotel:
-  #   Type: AWS::Serverless::Function
-  #   Properties:
-  #     Handler: hotels.updateHotel
-  #     Runtime: nodejs8.10
-  #     CodeUri: src/
-  #     Policies: AmazonDynamoDBFullAccess
-  #     Environment:
-  #       Variables:
-  #           TABLE_NAME: !Ref Hotels
-  #     Events:
-  #       HotelChatbotBackend:
-  #         Type: Api
-  #         Properties:
-  #           RestApiId: !Ref HotelChatbotBackend
-  #           Path: /Hotel/{hotelId}
-  #           Method: PUT
+  UpdateEmployee:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.angel.employees.Updater
+      Runtime: java8
+      CodeUri: build/distributions/employees-api-rest.zip
+      MemorySize: 256
+      Timeout: 10
+      Policies: AmazonDynamoDBFullAccess
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref Employees
+      Events:
+        EmployeesBackend:
+          Type: Api
+          Properties:
+            RestApiId: !Ref EmployeesBackend
+            Path: /Employee/{id}
+            Method: PUT
   Employees: 
     Type: AWS::Serverless::SimpleTable
     Properties: 

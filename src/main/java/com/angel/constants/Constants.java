@@ -1,4 +1,4 @@
-package com.angel.com.angel.constants;
+package com.angel.constants;
 
 public class Constants {
     public static final String STATUS_ACTIVE = "ACTIVE";

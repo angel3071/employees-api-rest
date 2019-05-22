@@ -24,7 +24,7 @@ Resources:
            Type: Api
            Properties:
              RestApiId: !Ref EmployeesBackend
-             Path: /Employee/{id}
+             Path: /employees/{id}
              Method: GET
   GetEmployees:
     Type: AWS::Serverless::Function
@@ -43,7 +43,7 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref EmployeesBackend
-            Path: /Employee
+            Path: /employees
             Method: GET
   WriteEmployee:
     Type: AWS::Serverless::Function
@@ -62,7 +62,7 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref EmployeesBackend
-            Path: /Employee
+            Path: /employees
             Method: POST
   DeleteEmployee:
     Type: AWS::Serverless::Function
@@ -81,7 +81,7 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref EmployeesBackend
-            Path: /Employee/{id}
+            Path: /employees/{id}
             Method: DELETE
   UpdateEmployee:
     Type: AWS::Serverless::Function
@@ -100,7 +100,7 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref EmployeesBackend
-            Path: /Employee/{id}
+            Path: /employees/{id}
             Method: PUT
   Employees: 
     Type: AWS::Serverless::SimpleTable

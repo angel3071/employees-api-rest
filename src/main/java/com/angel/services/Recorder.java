@@ -11,7 +11,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.angel.beans.Employee;
-import com.angel.com.angel.constants.Constants;
+import com.angel.constants.Constants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONObject;
 
@@ -63,7 +63,10 @@ public class Recorder implements RequestHandler<APIGatewayProxyRequestEvent, API
             table.putItem(item);
 
             logger.log("Everything as expected");
-            response.setStatusCode(200);
+            response.setStatusCode(201);
+            Map<String, String> customHeaders = new HashMap<>();
+            customHeaders.put("Location", String.format("employees/%s", employee.getId()));
+            response.setHeaders(customHeaders);
             Map<String, String> responseBody = new HashMap<String, String>();
             responseBody.put(Constants.MESSAGE, String.format("Successful employee creation with Id: %s", employee.getId()));
             String responseBodyString = new JSONObject(responseBody).toJSONString();

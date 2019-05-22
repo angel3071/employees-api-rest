@@ -10,7 +10,7 @@ Resources:
   GetEmployee:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.angel.employees.GetterEmployee
+      Handler: com.angel.services.GetterEmployee
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
       MemorySize: 256
@@ -29,7 +29,7 @@ Resources:
   GetEmployees:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.angel.employees.GetterEmployees
+      Handler: com.angel.services.GetterEmployees
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
       MemorySize: 256
@@ -48,7 +48,7 @@ Resources:
   WriteEmployee:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.angel.employees.Record
+      Handler: com.angel.services.Recorder
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
       MemorySize: 256
@@ -67,7 +67,7 @@ Resources:
   DeleteEmployee:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.angel.employees.Deleter
+      Handler: com.angel.services.Deleter
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
       MemorySize: 256
@@ -86,7 +86,7 @@ Resources:
   UpdateEmployee:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.angel.employees.Updater
+      Handler: com.angel.services.Updater
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
       MemorySize: 256

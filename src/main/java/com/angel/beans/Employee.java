@@ -27,7 +27,11 @@ public class Employee {
         this.dateOfEmployment = dateOfEmployment;
         this.status = status;
     }
+    public Employee(String firstName){
+        this.firstName = firstName;
+    }
     public Employee(){ }
+
 
 
     public String getId() {

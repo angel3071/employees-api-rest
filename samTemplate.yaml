@@ -14,7 +14,7 @@ Resources:
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
       MemorySize: 256
-      Timeout: 10
+      Timeout: 20
       Policies: AmazonDynamoDBFullAccess
       Environment:
         Variables:
@@ -52,7 +52,7 @@ Resources:
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
       MemorySize: 256
-      Timeout: 10
+      Timeout: 20
       Policies: AmazonDynamoDBFullAccess
       Environment:
         Variables:
@@ -107,7 +107,7 @@ Resources:
     Properties: 
       TableName: Employees
       PrimaryKey:
-        Name: Id
+        Name: id
         Type: String
       ProvisionedThroughput:
         ReadCapacityUnits: 5

@@ -11,12 +11,11 @@ public class GeneralService {
 
     APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
 
-    public APIGatewayProxyResponseEvent createResponse(int statusCode, String message){
+    public APIGatewayProxyResponseEvent createMessageResponse(int statusCode, String message){
         response.setStatusCode(statusCode);
         Map<String, String> responseBody = Collections.singletonMap(Constants.MESSAGE, message);
         String responseBodyString = new JSONObject(responseBody).toJSONString();
         response.setBody(responseBodyString);
-    return  response;
-
+        return  response;
     }
 }

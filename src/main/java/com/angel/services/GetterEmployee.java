@@ -1,10 +1,5 @@
 package com.angel.services;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
-import com.amazonaws.services.dynamodbv2.document.Item;
-import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -44,15 +39,18 @@ public class GetterEmployee extends GeneralService implements RequestHandler<API
             logger.log("EmployeeId: " + employeeId);
 
             edo = new EmployeeDao();
+            logger.log("Dao creation");
             Employee employee = getEmployee(employeeId);
+            logger.log("getEmploye action");
             if(employee != null){
-                response = createResponse(200, mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee));
+                response.setStatusCode(200);
+                response.setBody(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee));
             } else {
-                response = createResponse(400, "Employee not found");
+                response = createMessageResponse(400, "Employee not found");
             }
 
         } catch (Exception e) {
-            response = createResponse(400, e.toString());
+            response = createMessageResponse(400, e.toString());
 
         }
         logger.log(response.toString());

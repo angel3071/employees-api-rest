@@ -32,7 +32,7 @@ public class Recorder extends GeneralService implements RequestHandler<APIGatewa
             String bodyStr = event.getBody();
             if (bodyStr == null ) {
                 logger.log("Empty body");
-                response = createResponse(400, Constants.INVALID_REQUEST);
+                response = createMessageResponse(400, Constants.INVALID_REQUEST);
             }
             logger.log(bodyStr);
             Employee employee = mapper.readValue(bodyStr, Employee.class);
@@ -48,18 +48,18 @@ public class Recorder extends GeneralService implements RequestHandler<APIGatewa
 
             logger.log("Everything as expected");
 
-            response = createResponse(201, String.format("Successful employee creation with Id: %s", employee.getId()));
+            response = createMessageResponse(201, String.format("Successful employee creation with Id: %s", employee.getId()));
             Map<String, String> customHeaders = new HashMap<>();
             customHeaders.put("Location", String.format("employees/%s", employee.getId()));
             response.setHeaders(customHeaders);
 
         } catch(IllegalArgumentException iae){
             logger.log("Not all the parameters was provided");
-            response = createResponse(400, "All parameters must be provided");
+            response = createMessageResponse(400, "All parameters must be provided");
 
         } catch (Exception e) {
             logger.log("Body json string related exception");
-            response = createResponse(400, Constants.INVALID_REQUEST);
+            response = createMessageResponse(400, Constants.INVALID_REQUEST);
         }
 
         logger.log(response.toString());

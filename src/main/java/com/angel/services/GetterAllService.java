@@ -9,11 +9,10 @@ import com.angel.beans.Employee;
 import com.angel.dao.EmployeeDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.Map;
-import java.util.Optional;
+import java.util.List;
 
 
-public class GetterEmployee extends GeneralService implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class GetterAllService extends GeneralService implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
 
     private static EmployeeDao edo;
@@ -22,43 +21,28 @@ public class GetterEmployee extends GeneralService implements RequestHandler<API
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
         LambdaLogger logger = context.getLogger();
-        logger.log("Loading Java Lambda handler of Employees GetterEmployee");
-
         ObjectMapper mapper = new ObjectMapper();
-
-        String employeeId = "";
+        logger.log("Loading Java Lambda handler of Employees GetterAllService");
 
         try {
 
-            Map<String, String> qps = event.getPathParameters();
-            if (qps != null) {
-                if (qps.get("id") != null) {
-                    employeeId = qps.get("id");
-                }
-            }
-            logger.log("EmployeeId: " + employeeId);
-
             edo = new EmployeeDao();
             logger.log("Dao creation");
-            Employee employee = getEmployee(employeeId);
-            logger.log("getEmploye action");
-            if(employee != null){
+            List<Employee> employees = edo.getAll();
+            logger.log("getEmployes action");
+            if(employees.size() > 0 ){
                 response.setStatusCode(200);
-                response.setBody(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee));
+                response.setBody(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employees));
             } else {
-                response = createMessageResponse(400, "Employee not found");
+                response = createMessageResponse(400, "Not employees found");
             }
 
         } catch (Exception e) {
+
             response = createMessageResponse(400, e.toString());
 
         }
         logger.log(response.toString());
         return response;
-    }
-
-    private static Employee getEmployee(String employeeId) {
-        Optional<Employee> employee = edo.get(employeeId);
-        return employee.orElseGet(null);
     }
 }

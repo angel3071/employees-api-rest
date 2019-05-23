@@ -1,6 +1,5 @@
 package com.angel.services;
 
-
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -11,24 +10,28 @@ import com.angel.constants.Constants;
 import com.angel.dao.EmployeeDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-public class Recorder extends GeneralService implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class UpdaterService extends GeneralService implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
 
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
-
-
         LambdaLogger logger = context.getLogger();
-        logger.log("Loading Java Lambda handler of Employees Recorder");
+        logger.log("Loading Java Lambda handler of Employees GetterService");
 
+
+        String employeeId = "";
         ObjectMapper mapper = new ObjectMapper();
 
         try {
 
+            Map<String, String> qps = event.getPathParameters();
+            if (qps != null) {
+                if (qps.get("id") != null) {
+                    employeeId = qps.get("id");
+                }
+            }
             String bodyStr = event.getBody();
             if (bodyStr == null ) {
                 logger.log("Empty body");
@@ -36,32 +39,22 @@ public class Recorder extends GeneralService implements RequestHandler<APIGatewa
             }
             logger.log(bodyStr);
             Employee employee = mapper.readValue(bodyStr, Employee.class);
+            employee.setId(employeeId);
             logger.log("after mapper");
 
-            employee.setId(UUID.randomUUID().toString());
-            logger.log("after setid");
 
             EmployeeDao edo = new EmployeeDao();
             logger.log("dao creation");
-            edo.save(employee);
-            logger.log("dao save action");
+            edo.update(employee);
+            logger.log("dao update action");
 
             logger.log("Everything as expected");
 
-            response = createMessageResponse(201, String.format("Successful employee creation with Id: %s", employee.getId()));
-            Map<String, String> customHeaders = new HashMap<>();
-            customHeaders.put("Location", String.format("employees/%s", employee.getId()));
-            response.setHeaders(customHeaders);
+            response = createMessageResponse(200, String.format("Successful employee update with Id: %s", employeeId));
 
-        } catch(IllegalArgumentException iae){
-            logger.log("Not all the parameters was provided");
-            response = createMessageResponse(400, "All parameters must be provided");
-
-        } catch (Exception e) {
-            logger.log("Body json string related exception");
-            response = createMessageResponse(400, Constants.INVALID_REQUEST);
+        } catch (Exception e){
+            response = createMessageResponse(400, e.toString());
         }
-
         logger.log(response.toString());
         return response;
     }

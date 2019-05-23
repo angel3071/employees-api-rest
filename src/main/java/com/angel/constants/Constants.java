@@ -12,4 +12,5 @@ public class Constants {
     public static final String STATUS = "status";
     public static final String MESSAGE = "message";
     public static final String INVALID_REQUEST = "Invalid request";
+    public static final String STATUS_INACTIVE = "INACTIVE";
 }

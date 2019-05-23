@@ -10,7 +10,7 @@ Resources:
   GetEmployee:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.angel.services.GetterEmployee
+      Handler: com.angel.services.GetterService
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
       MemorySize: 256
@@ -29,11 +29,11 @@ Resources:
   GetEmployees:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.angel.services.GetterEmployees
+      Handler: com.angel.services.GetterAllService
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
       MemorySize: 256
-      Timeout: 10
+      Timeout: 20
       Policies: AmazonDynamoDBFullAccess
       Environment:
         Variables:
@@ -48,7 +48,7 @@ Resources:
   WriteEmployee:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.angel.services.Recorder
+      Handler: com.angel.services.WriterService
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
       MemorySize: 256
@@ -67,11 +67,11 @@ Resources:
   DeleteEmployee:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.angel.services.Deleter
+      Handler: com.angel.services.DeleterService
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
       MemorySize: 256
-      Timeout: 10
+      Timeout: 20
       Policies: AmazonDynamoDBFullAccess
       Environment:
         Variables:
@@ -86,11 +86,11 @@ Resources:
   UpdateEmployee:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.angel.services.Updater
+      Handler: com.angel.services.UpdaterService
       Runtime: java8
       CodeUri: build/distributions/employees-api-rest.zip
       MemorySize: 256
-      Timeout: 10
+      Timeout: 20
       Policies: AmazonDynamoDBFullAccess
       Environment:
         Variables:

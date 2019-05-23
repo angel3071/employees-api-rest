@@ -1,8 +1,28 @@
 
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Este es el stack de la consola web que acompana al bot
-Resources: 
+Description: This stack implements the infrastructure for the Employees API
+Resources:
+  Startup:
+    Type: Custom::Startup
+    Properties:
+      ServiceToken: !GetAtt StartupLambda.Arn
+      Dummy: 2
+    DependsOn:
+      - Employees
+  # Lambda function for custom resource
+  StartupLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: build/distributions/employees-api-rest.zip
+      Handler: com.angel.utils.StartupArtifact::handleRequest
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: java8
+      Timeout: 20
+      MemorySize: 256
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref Employees
   EmployeesBackend:
     Type: AWS::Serverless::Api
     Properties:
@@ -105,7 +125,7 @@ Resources:
   Employees: 
     Type: AWS::Serverless::SimpleTable
     Properties: 
-      TableName: Employees
+      TableName: Employees1
       PrimaryKey:
         Name: id
         Type: String

@@ -130,7 +130,7 @@ In this repo you have the Postman collection with some use cases and actually a
 set of simple but contundend automated tests:
 
 
-![Collection and testing](images/AWS-Lambda-and-DynamoDB-Architecture.png)
+![Collection and testing](images/Screenshot_20190524_175647.png)
 
 
 <!-- CONTACT -->

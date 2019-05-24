@@ -96,25 +96,47 @@ aws s3 mb s3://{whetever-you-want-to-call-your-bucket}
 
 ### Deployment
 
-2. Clone the repo
+1. Clone the repo
 ```sh
 git clone https://github.com/angel3071/employees-api-rest
 ```
-3. Install NPM packages
+2. Build
 ```sh
-npm install
+gradle build
 ```
-4. Enter your API in `config.js`
-```JS
-const API_KEY = 'ENTER YOUR API';
+4. Package
+```sh
+aws cloudformation package --template-file samTemplate.yaml --s3-bucket {whetever-your-bucket-its-named} --output-template-file outputSamTemplate.yaml
 ```
+5. Deploy
+```sh
+aws cloudformation deploy --stack-name EmployeesApi --template outputSamTemplate.yaml --capabilities CAPABILITY_IAM
+```
+
+On the deployment a custom resource its created and it loads some example data
+to de databse to be ready to testing.
 
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Usage (the api its actually already live!)
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+All the possible methods are described on the documentation, please refer to
+them, a little example:
+
+```sh
+curl --location --request GET "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/56b6c351-2c5c-4f5f-930d-6ad02b0d8c80"
+
+{
+    "id": "56b6c351-2c5c-4f5f-930d-6ad02b0d8c80",
+    "firstName": "Jhon",
+    "middleInitial": "S",
+    "lastName": "Snow",
+    "dateOfBirth": "01/01/1991",
+    "dateOfEmployment": "01/01/2019",
+    "status": "ACTIVE"
+}
+```
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 

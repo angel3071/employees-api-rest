@@ -7,9 +7,6 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="logo.png" alt="Logo" width="80" height="80">
-  </a>
 
   <h3 align="center">Serverless Employees Api</h3>
 
@@ -19,8 +16,6 @@
     <a href="https://documenter.getpostman.com/view/7170007/S1TR4zZz"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/angel3071/employees-api-rest">View Demo</a>
-    ·
     <a href="https://github.com/angel3071/employees-api-rest/issues">Report Bug</a>
     ·
     <a href="https://github.com/angel3071/employees-api-rest/issues">Request Feature</a>
@@ -48,7 +43,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][template1-designer]](https://example.com)
 
 There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
 

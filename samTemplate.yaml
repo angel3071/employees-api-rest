@@ -7,7 +7,7 @@ Resources:
     Type: Custom::Startup
     Properties:
       ServiceToken: !GetAtt StartupLambda.Arn
-      Dummy: 2
+      Dummy: 3
     DependsOn:
       - Employees
   # Lambda function for custom resource
@@ -125,7 +125,7 @@ Resources:
   Employees: 
     Type: AWS::Serverless::SimpleTable
     Properties: 
-      TableName: Employees1
+      TableName: Employees
       PrimaryKey:
         Name: id
         Type: String

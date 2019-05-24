@@ -15,9 +15,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * This class takes the write action request, calls the corresponding action on the Dao object and returns the response to the apigateway
+ */
 public class WriterService extends GeneralService implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-
+    /**
+     * @param event   ApiGatewayProxyRequestEvent representation of the http request
+     * @param context The representation on which the actual lambda is running
+     * @return A response event to the ApiGateway request action
+     */
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
 
@@ -30,7 +37,7 @@ public class WriterService extends GeneralService implements RequestHandler<APIG
         try {
 
             String bodyStr = event.getBody();
-            if (bodyStr == null ) {
+            if (bodyStr == null) {
                 logger.log("Empty body");
                 response = createMessageResponse(400, Constants.INVALID_REQUEST);
             }
@@ -53,7 +60,7 @@ public class WriterService extends GeneralService implements RequestHandler<APIG
             customHeaders.put("Location", String.format("employees/%s", employee.getId()));
             response.setHeaders(customHeaders);
 
-        } catch(IllegalArgumentException iae){
+        } catch (IllegalArgumentException iae) {
             logger.log("Not all the parameters was provided");
             response = createMessageResponse(400, "All parameters must be provided");
 

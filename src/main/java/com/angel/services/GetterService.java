@@ -12,13 +12,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
 import java.util.Optional;
 
-
+/**
+ * This class takes the get action request, calls the corresponding action on the Dao object and returns the response to the apigateway
+ */
 public class GetterService extends GeneralService implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
 
     private static EmployeeDao edo;
 
-
+    /**
+     * @param event   ApiGatewayProxyRequestEvent representation of the http request
+     * @param context The representation on which the actual lambda is running
+     * @return A response event to the ApiGateway request action
+     */
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
         LambdaLogger logger = context.getLogger();
@@ -42,7 +48,7 @@ public class GetterService extends GeneralService implements RequestHandler<APIG
             logger.log("Dao creation");
             Employee employee = getEmployee(employeeId);
             logger.log("getEmploye action");
-            if(employee != null){
+            if (employee != null) {
                 response.setStatusCode(200);
                 response.setBody(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee));
             } else {

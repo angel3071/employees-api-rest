@@ -14,20 +14,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * This class implements the General Dao interface to define the actual actions to perform
+ */
 public class EmployeeDao implements Dao<Employee> {
+    //Some objects used to perform the database interling actions
     static AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().build();
     static DynamoDB dynamoDB = new DynamoDB(client);
-
     static String tableName = System.getenv(Constants.TABLE_NAME);
-
     Table table = dynamoDB.getTable(tableName);
+    //Jackson mapper was the better option to perform the parse in and out
     ObjectMapper mapper = new ObjectMapper();
 
+    /**
+     * @param id The Id to retreive the element
+     * @return The actual employee representation for the employee searched
+     */
     @Override
     public Optional<Employee> get(String id) {
         Item item = table.getItem(Constants.ID, id);
-        if(item.get(Constants.STATUS) == null || !Constants.STATUS_ACTIVE.equals(item.get(Constants.STATUS))){
-            return  Optional.ofNullable(null);
+        if (item.get(Constants.STATUS) == null || !Constants.STATUS_ACTIVE.equals(item.get(Constants.STATUS))) {
+            return Optional.ofNullable(null);
         }
         try {
             Employee employee = mapper.readValue(item.toJSON(), Employee.class);
@@ -38,6 +45,10 @@ public class EmployeeDao implements Dao<Employee> {
         return Optional.ofNullable(null);
     }
 
+    /**
+     * @return An arraylist of all ACTIVE employees on the database
+     * @throws IOException In the case of not compatible types to json representation
+     */
     @Override
     public List<Employee> getAll() throws IOException {
         List<Employee> employees = new ArrayList<>();
@@ -51,13 +62,16 @@ public class EmployeeDao implements Dao<Employee> {
                 expressionAttributeNames,
                 expressionAttributeValues);
         Iterator<Item> iterator = items.iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             Employee employee = mapper.readValue(iterator.next().toJSON(), Employee.class);
             employees.add(employee);
         }
         return employees;
     }
 
+    /**
+     * @param employee The actual employee to write to the database
+     */
     @Override
     public void save(Employee employee) {
         Item item = new Item().withPrimaryKey(Constants.ID, employee.getId())
@@ -71,6 +85,9 @@ public class EmployeeDao implements Dao<Employee> {
 
     }
 
+    /**
+     * @param employee The employee to update on the database
+     */
     @Override
     public void update(Employee employee) {
         Item item = new Item().withPrimaryKey(Constants.ID, employee.getId())
@@ -84,6 +101,9 @@ public class EmployeeDao implements Dao<Employee> {
 
     }
 
+    /**
+     * @param id The key to perform the delete action on
+     */
     @Override
     public void delete(String id) {
         UpdateItemSpec updateItemSpec = new UpdateItemSpec()

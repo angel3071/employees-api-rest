@@ -1,9 +1,47 @@
-{
-  "id" : "56b6c351-2c5c-4f5f-930d-6ad02b0d8c82",
-  "firstName" : "Pepe",
-  "middleInitial" : "E",
-  "lastName" : "Ramí",
-  "dateOfBirth" : "28/01/1991",
-  "dateOfEmployment" : "na",
-  "status" : "ACTIVE"
-}
+[
+  {
+    "id" : "56b6c351-2c5c-4f5f-930d-6ad02b0d8c80",
+    "firstName" : "Jhon",
+    "middleInitial" : "S",
+    "lastName" : "Snow",
+    "dateOfBirth" : "01/01/1991",
+    "dateOfEmployment" : "01/01/2019",
+    "status" : "ACTIVE"
+  },
+  {
+    "id" : "56b6c351-2c5c-4f5f-930d-6ad02b0d8c81",
+    "firstName" : "Daenerys",
+    "middleInitial" : "T",
+    "lastName" : "Targaryen",
+    "dateOfBirth" : "15/05/1990",
+    "dateOfEmployment" : "21/02/2015",
+    "status" : "ACTIVE"
+  },
+  {
+    "id" : "56b6c351-2c5c-4f5f-930d-6ad02b0d8c82",
+    "firstName" : "Tyrion",
+    "middleInitial" : "E",
+    "lastName" : "Lannister",
+    "dateOfBirth" : "27/06/1992",
+    "dateOfEmployment" : "25/03/2013",
+    "status" : "ACTIVE"
+  },
+  {
+    "id" : "56b6c351-2c5c-4f5f-930d-6ad02b0d8c83",
+    "firstName" : "Sansa",
+    "middleInitial" : "S",
+    "lastName" : "Stark",
+    "dateOfBirth" : "28/01/1991",
+    "dateOfEmployment" : "22/12/2010",
+    "status" : "ACTIVE"
+  },
+  {
+    "id" : "56b6c351-2c5c-4f5f-930d-6ad02b0d8c84",
+    "firstName" : "Sandor",
+    "middleInitial" : "H",
+    "lastName" : "Clegane",
+    "dateOfBirth" : "28/01/1980",
+    "dateOfEmployment" : "22/11/2000",
+    "status" : "INACTIVE"
+  }
+]

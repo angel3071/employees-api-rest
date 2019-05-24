@@ -13,4 +13,6 @@ public class Constants {
     public static final String MESSAGE = "message";
     public static final String INVALID_REQUEST = "Invalid request";
     public static final String STATUS_INACTIVE = "INACTIVE";
+    public static final String AUTHORIZATION_USER = "Aladdin";
+    public static final String AUTHORIZATION_PASSWORD = "OpenSesame";
 }

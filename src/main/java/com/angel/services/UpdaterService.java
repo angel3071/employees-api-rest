@@ -12,9 +12,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Map;
 
+/**
+ * This class takes the update action request, calls the corresponding action on the Dao object and returns the response to the apigateway
+ */
 public class UpdaterService extends GeneralService implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-
+    /**
+     * @param event   ApiGatewayProxyRequestEvent representation of the http request
+     * @param context The representation on which the actual lambda is running
+     * @return A response event to the ApiGateway request action
+     */
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
         LambdaLogger logger = context.getLogger();
@@ -33,7 +40,7 @@ public class UpdaterService extends GeneralService implements RequestHandler<API
                 }
             }
             String bodyStr = event.getBody();
-            if (bodyStr == null ) {
+            if (bodyStr == null) {
                 logger.log("Empty body");
                 response = createMessageResponse(400, Constants.INVALID_REQUEST);
             }
@@ -52,7 +59,7 @@ public class UpdaterService extends GeneralService implements RequestHandler<API
 
             response = createMessageResponse(200, String.format("Successful employee update with Id: %s", employeeId));
 
-        } catch (Exception e){
+        } catch (Exception e) {
             response = createMessageResponse(400, e.toString());
         }
         logger.log(response.toString());

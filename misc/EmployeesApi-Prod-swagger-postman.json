@@ -1,0 +1,33 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "EmployeesApi"
+  },
+  "host": "1suc3jfv04.execute-api.us-east-1.amazonaws.com",
+  "basePath": "/Prod",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/employees": {
+      "get": {
+        "responses": {}
+      },
+      "post": {
+        "responses": {}
+      }
+    },
+    "/employees/{id}": {
+      "get": {
+        "responses": {}
+      },
+      "put": {
+        "responses": {}
+      },
+      "delete": {
+        "responses": {}
+      }
+    }
+  }
+}

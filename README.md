@@ -24,22 +24,6 @@
 
 
 
-<!-- TABLE OF CONTENTS -->
-## Table of Contents
-
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
-
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -70,10 +54,10 @@ On a global point of view:
 * [AWS CloudFormation](https://aws.amazon.com/es/cloudformation/)
 
 On the Code point of view:
-* [Java8]
-* [Gradle]
-* [aws sdk]
-* [Jackson]
+* Java8
+* Gradle
+* aws sdk
+* Jackson
 
 
 <!-- GETTING STARTED -->
@@ -137,9 +121,16 @@ curl --location --request GET "https://1suc3jfv04.execute-api.us-east-1.amazonaw
     "status": "ACTIVE"
 }
 ```
+Here you have the actual [swagger definition for postman](misc/EmployeesApi-Prod-swagger-postman.json), go and try all the
+different methods.
 
 _For more examples, please refer to the [Documentation](https://documenter.getpostman.com/view/7170007/S1TR4zZz)_
 
+In this repo you have the Postman collection with some use cases and actually a
+set of simple but contundend automated tests:
+
+
+![Collection and testing](images/AWS-Lambda-and-DynamoDB-Architecture.png)
 
 
 <!-- CONTACT -->

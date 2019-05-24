@@ -1,0 +1,1958 @@
+{
+	"info": {
+		"_postman_id": "cb5d0eb3-6194-4048-8d66-1591796e84a2",
+		"name": "EmployeesApi",
+		"description": "# Introduction\nThis rest api exposes the necessary operations to perform get, create, update and delete Employees to a no-sql database\n\n# Overview\nThis api is a serverless aproach deployed on aws, it uses apigateway, lambda functions written in Java8 and uses dynamodb as de database storage.\nAll the resources are managed on the scenario of infraestructure as code IaC, on a cloudformation stack\n \n# Authentication\nThis api is for now public to use\n\n# Error Codes\nHttp standard code errors, if something goes wrong a message shows up to help\n\n - 200 ok operations\n - 201 created operation\n - 400 bad request situations\n - 401 unauthorized (delete action)\n - 404 resource not found...\n\n# Rate limit\nBy default, API Gateway limits the steady-state request rate to 10,000 requests per second (rps). It limits the burst (that is, the maximum bucket size) to 5,000 requests across all APIs within an AWS account. In API Gateway, the burst limit corresponds to the maximum number of concurrent request submissions that API Gateway can fulfill at any moment without returning 429 Too Many Requests error responses.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "employees",
+			"item": [
+				{
+					"name": "All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a2ad8419-35e0-4957-baca-4af8c173da77",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees"
+							]
+						},
+						"description": "Returns a Json array of ACTIVE employees on the database"
+					},
+					"response": [
+						{
+							"name": "All ACTIVE employees",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1993"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 17:09:27 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "afb117e1-7e46-11e9-a98d-6d91a8764954"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aMrDHE3NoAMFxhg="
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce82547-d9b86f8a66d53f2277c6094c;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Miss from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 80638a81b02ff4af7d1273bdef5e47ea.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "4xIVbtAtxiWUFjurr9FRtPBdS9YWO8uKPRplkKacZFu6uJTgKK6IMg=="
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"56b6c351-2c5c-4f5f-930d-6ad02b0d8c80\",\n        \"firstName\": \"Jhon\",\n        \"middleInitial\": \"S\",\n        \"lastName\": \"Snow\",\n        \"dateOfBirth\": \"01/01/1991\",\n        \"dateOfEmployment\": \"01/01/2019\",\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"id\": \"705cdc47-c251-45fc-9e37-c32c450c1a06\",\n        \"firstName\": \"Gregor\",\n        \"middleInitial\": \"M\",\n        \"lastName\": \"Clegane\",\n        \"dateOfBirth\": \"28/01/1990\",\n        \"dateOfEmployment\": \"25/02/2000\",\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"id\": \"bba7b607-7ec0-413e-8716-ea3f231cfc10\",\n        \"firstName\": \"Gregor\",\n        \"middleInitial\": \"M\",\n        \"lastName\": \"Clegane\",\n        \"dateOfBirth\": \"28/01/1990\",\n        \"dateOfEmployment\": \"25/02/2000\",\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"id\": \"bc8df78f-c37d-4d7d-bdf9-da7a31eb0feb\",\n        \"firstName\": \"Gregor\",\n        \"middleInitial\": \"M\",\n        \"lastName\": \"Clegane\",\n        \"dateOfBirth\": \"28/01/1990\",\n        \"dateOfEmployment\": \"25/02/2000\",\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"id\": \"56b6c351-2c5c-4f5f-930d-6ad02b0d8c83\",\n        \"firstName\": \"Sansa\",\n        \"middleInitial\": \"S\",\n        \"lastName\": \"Stark\",\n        \"dateOfBirth\": \"28/01/1991\",\n        \"dateOfEmployment\": \"22/12/2010\",\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"id\": \"fb97be38-884e-472f-8b6e-1a644b4ab9df\",\n        \"firstName\": \"Gregor\",\n        \"middleInitial\": \"M\",\n        \"lastName\": \"Clegane\",\n        \"dateOfBirth\": \"28/01/1990\",\n        \"dateOfEmployment\": \"25/02/2000\",\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"id\": \"56b6c351-2c5c-4f5f-930d-6ad02b0d8c82\",\n        \"firstName\": \"Tyrion\",\n        \"middleInitial\": \"E\",\n        \"lastName\": \"Lannister\",\n        \"dateOfBirth\": \"27/06/1992\",\n        \"dateOfEmployment\": \"25/03/2013\",\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"id\": \"56b6c351-2c5c-4f5f-930d-6ad02b0d8c81\",\n        \"firstName\": \"Daenerys\",\n        \"middleInitial\": \"T\",\n        \"lastName\": \"Targaryen\",\n        \"dateOfBirth\": \"15/05/1990\",\n        \"dateOfEmployment\": \"21/02/2015\",\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"id\": \"56b6c351-2c5c-4f5f-930d-6ad02b0d8c84\",\n        \"firstName\": \"Sandor\",\n        \"middleInitial\": \"H\",\n        \"lastName\": \"Clegane\",\n        \"dateOfBirth\": \"28/01/1991\",\n        \"dateOfEmployment\": \"today\",\n        \"status\": \"ACTIVE\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Existing and active employee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dda5cb50-bcf7-4694-8509-b57f72848b07",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/56b6c351-2c5c-4f5f-930d-6ad02b0d8c80",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees",
+								"56b6c351-2c5c-4f5f-930d-6ad02b0d8c80"
+							]
+						},
+						"description": "An existing and ACTIVE employee"
+					},
+					"response": [
+						{
+							"name": "Existing and active employee",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/56b6c351-2c5c-4f5f-930d-6ad02b0d8c80",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees",
+										"56b6c351-2c5c-4f5f-930d-6ad02b0d8c80"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "215"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 16:39:51 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "8d6505ef-7e42-11e9-9c4f-91bbeff6c7ba"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aMmtsG1joAMF1IA="
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce81e57-e763fa4aae648df9e5a474d7;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Miss from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 80638a81b02ff4af7d1273bdef5e47ea.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "Lwrxys39ANqMRb0DdZMfo11rSD3HJBkxAxp7bLPAaoHHOnirB-gX1Q=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"56b6c351-2c5c-4f5f-930d-6ad02b0d8c80\",\n    \"firstName\": \"Jhon\",\n    \"middleInitial\": \"S\",\n    \"lastName\": \"Snow\",\n    \"dateOfBirth\": \"01/01/1991\",\n    \"dateOfEmployment\": \"01/01/2019\",\n    \"status\": \"ACTIVE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Non existing employee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dda5cb50-bcf7-4694-8509-b57f72848b07",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/56b6c351-2c5c-4f5f-930d-6ad02b0d8c8",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees",
+								"56b6c351-2c5c-4f5f-930d-6ad02b0d8c8"
+							]
+						},
+						"description": "A non existing user request"
+					},
+					"response": [
+						{
+							"name": "Non existing employee",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/56b6c351-2c5c-4f5f-930d-6ad02b0d8c8",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees",
+										"56b6c351-2c5c-4f5f-930d-6ad02b0d8c8"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 17:12:42 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "23aabb2f-7e47-11e9-a00d-6b6245e1879a"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aMrhhH1woAMFoyQ="
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce82609-3548078cca68c5cb5c2a8b09;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Error from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 80638a81b02ff4af7d1273bdef5e47ea.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "DOIvDGg0l6bsE2c7mlgTLpSCUDMbK1Q8KLJb9AUkEWvWjNEYsCMuww=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Employee not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Correct info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b6aa13a3-e424-4317-8b3d-402ae1638806",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"Gregor\",\n    \"middleInitial\": \"M\",\n    \"lastName\": \"Clegane\",\n    \"dateOfBirth\": \"28/01/1990\",\n    \"dateOfEmployment\": \"25/02/2000\"\n}"
+						},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees"
+							]
+						},
+						"description": "Write the proporcioned employee json representation to the databse"
+					},
+					"response": [
+						{
+							"name": "Correct info",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"firstName\": \"Gregor\",\n    \"middleInitial\": \"M\",\n    \"lastName\": \"Clegane\",\n    \"dateOfBirth\": \"28/01/1990\",\n    \"dateOfEmployment\": \"25/02/2000\"\n}"
+								},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "88"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 19:14:15 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "1ea9d8ff-7e58-11e9-959e-7f8ff85d7b9f"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aM9VEHaxIAMFt_A="
+								},
+								{
+									"key": "Location",
+									"value": "employees/7bb1136a-9f2b-41b2-bc37-6977c5a0642c"
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce84286-240d5b5079e174b0c0c039a4;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Miss from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 a43b25e4690d3514ec42aed46c3e2f79.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "iw5G_ATzWKFmBbQg_bpL4eKBGijvIOw7AtgoH1WqAWBZeVmgDxFfKQ=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successful employee creation with Id: 7bb1136a-9f2b-41b2-bc37-6977c5a0642c\"\n}"
+						}
+					]
+				},
+				{
+					"name": "No complete info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b6aa13a3-e424-4317-8b3d-402ae1638806",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"Gregor\",\n    \"middleInitial\": \"M\",\n    \"lastName\": \"Clegane\",\n    \"dateOfBirth\": \"28/01/1990\"\n}"
+						},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees"
+							]
+						},
+						"description": "All parameters must be provided"
+					},
+					"response": [
+						{
+							"name": "No complete info",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"firstName\": \"Gregor\",\n    \"middleInitial\": \"M\",\n    \"lastName\": \"Clegane\",\n    \"dateOfBirth\": \"28/01/1990\"\n}"
+								},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 16:50:45 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "12e983dd-7e44-11e9-95f9-2dd073aeb5a6"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aMoTzHqrIAMFxSQ="
+								},
+								{
+									"key": "Location",
+									"value": "employees/fb97be38-884e-472f-8b6e-1a644b4ab9df"
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce820e5-08daec15d42ee2871da71b5d;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Error from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 80638a81b02ff4af7d1273bdef5e47ea.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "QJW2HDfTsnC0599PhZ09k-wgSo-o9l2ZYh4ZR4RV0izBLAOD1yKMzA=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"All parameters must be provided\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Invalid json",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b6aa13a3-e424-4317-8b3d-402ae1638806",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"Gregor\",\n    \"middleInitial\": \"M\",\n    \"lastName\": \"Clegane\",\n    \"dateOfBirth\": \"28/01/1990\"-\n}"
+						},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees"
+							]
+						},
+						"description": "Valid json strcture is needed"
+					},
+					"response": [
+						{
+							"name": "Invalid json",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"firstName\": \"Gregor\",\n    \"middleInitial\": \"M\",\n    \"lastName\": \"Clegane\",\n    \"dateOfBirth\": \"28/01/1990\"-\n}"
+								},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "29"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 16:52:28 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "5030c528-7e44-11e9-a496-6fc6bb5bb743"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aMoj3HQKoAMFSRw="
+								},
+								{
+									"key": "Location",
+									"value": "employees/fb97be38-884e-472f-8b6e-1a644b4ab9df"
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce8214b-03926baaa20edbd0f12b10aa;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Error from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 80638a81b02ff4af7d1273bdef5e47ea.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "iGve22k1sTX8mUyrUmh4VZISiW1YG0u0pLsDL_0tEnlBNL4Axm1VHQ=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid request\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Invalid parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b6aa13a3-e424-4317-8b3d-402ae1638806",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"Gregor\",\n    \"middleInitial\": \"M\",\n    \"lastName\": \"Clegane\",\n    \"dateOfBirth\": \"28/01/1990\",\n    \"dateOfEmploymen\": \"25/02/2000\"\n}"
+						},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees"
+							]
+						},
+						"description": "The parameters must be equals as the returned ones"
+					},
+					"response": [
+						{
+							"name": "Invalid parameter",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"firstName\": \"Gregor\",\n    \"middleInitial\": \"M\",\n    \"lastName\": \"Clegane\",\n    \"dateOfBirth\": \"28/01/1990\",\n    \"dateOfEmploymen\": \"25/02/2000\"\n}"
+								},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "29"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 16:53:28 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "73ff555c-7e44-11e9-bb5d-e5aa52c52843"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aMotQF7DoAMF7Bw="
+								},
+								{
+									"key": "Location",
+									"value": "employees/fb97be38-884e-472f-8b6e-1a644b4ab9df"
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce82188-a5b53a6aa80f69ccc12fc663;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Error from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 80638a81b02ff4af7d1273bdef5e47ea.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "56O04XBcHYXD-gh6vTjIq_j55F_-x7IjSu8S-R6uP5WPNL5hSTtSvQ=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid request\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Correct info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "90f92ed8-5317-4d04-8b4e-6486158298ea",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"firstName\": \"GREGOR\",\n        \"middleInitial\": \"M\",\n        \"lastName\": \"CLEGANE\",\n        \"dateOfBirth\": \"28/01/1990\",\n        \"dateOfEmployment\": \"25/02/2000\",\n        \"status\": \"ACTIVE\"\n    }"
+						},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees",
+								"eb36b784-3e07-4663-8778-e18304caf2ee"
+							]
+						},
+						"description": "To update an element you must fully provided"
+					},
+					"response": [
+						{
+							"name": "Correct info",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\n        \"firstName\": \"GREGOR\",\n        \"middleInitial\": \"M\",\n        \"lastName\": \"CLEGANE\",\n        \"dateOfBirth\": \"28/01/1990\",\n        \"dateOfEmployment\": \"25/02/2000\",\n        \"status\": \"ACTIVE\"\n    }"
+								},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees",
+										"eb36b784-3e07-4663-8778-e18304caf2ee"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "86"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 16:55:46 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "bda16e65-7e44-11e9-b724-3b61defe2f4e"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aMpAjHGNIAMFthg="
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce82203-c75c4081930d6f8615024d89;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Miss from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 80638a81b02ff4af7d1273bdef5e47ea.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "y_dJYcpFjW_8EJhHCPb1Vx9prL7devzjT1_xqaaQTok_9L_5EIPBzw=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successful employee update with Id: eb36b784-3e07-4663-8778-e18304caf2ee\"\n}"
+						}
+					]
+				},
+				{
+					"name": "No complete info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "90f92ed8-5317-4d04-8b4e-6486158298ea",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"firstName\": \"GREGOR\",\n        \"middleInitial\": \"M\",\n        \"lastName\": \"CLEGANE\",\n        \"dateOfBirth\": \"28/01/1990\",\n        \"dateOfEmployment\": \"25/02/2000\"\n    }"
+						},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees",
+								"eb36b784-3e07-4663-8778-e18304caf2ee"
+							]
+						},
+						"description": "The employee must be complete"
+					},
+					"response": [
+						{
+							"name": "No complete info",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\n        \"firstName\": \"GREGOR\",\n        \"middleInitial\": \"M\",\n        \"lastName\": \"CLEGANE\",\n        \"dateOfBirth\": \"28/01/1990\",\n        \"dateOfEmployment\": \"25/02/2000\"\n    }"
+								},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees",
+										"eb36b784-3e07-4663-8778-e18304caf2ee"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "71"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 16:56:42 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "e7ed3905-7e44-11e9-8093-cfdfb22a35ad"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aMpLpFWToAMF_6Q="
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce8224a-fc18af80d91c59580739f620;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Error from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 80638a81b02ff4af7d1273bdef5e47ea.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "dK-WBuxv5N-4jkvPbGQB9S3_NUp9U3Ar12z2g7dCAYr6QGIVDuLDIg=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"java.lang.IllegalArgumentException: status cannot be null\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Invalid json",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "90f92ed8-5317-4d04-8b4e-6486158298ea",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"firstName\": \"GREGOR\",\n        \"middleInitial\": \"M\",\n        \"lastName\": \"CLEGANE\",\n        \"dateOfBirth\": \"28/01/1990\",\n        \"dateOfEmployment\": \"25/02/2000\"-\n    }"
+						},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees",
+								"eb36b784-3e07-4663-8778-e18304caf2ee"
+							]
+						},
+						"description": "A valid json structure its needed"
+					},
+					"response": [
+						{
+							"name": "Invalid json",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\n        \"firstName\": \"GREGOR\",\n        \"middleInitial\": \"M\",\n        \"lastName\": \"CLEGANE\",\n        \"dateOfBirth\": \"28/01/1990\",\n        \"dateOfEmployment\": \"25/02/2000\"-\n    }"
+								},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees",
+										"eb36b784-3e07-4663-8778-e18304caf2ee"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "359"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 19:16:49 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "78d30da0-7e58-11e9-87f3-47998374ce70"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aM9ssHD4oAMF6Fw="
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce8431e-bb0517065df7d82aee9b3d14;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Error from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 a43b25e4690d3514ec42aed46c3e2f79.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "HD7sh6d0-m1ONMAIZjHMcNcs-l1G8pnt7xNfidaox8DXrT1fx0n5Xw=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unexpected character ('-' (code 45)): was expecting comma to separate Object entries\\n at [Source: (String)\\\"    {\\n        \\\"firstName\\\": \\\"GREGOR\\\",\\n        \\\"middleInitial\\\": \\\"M\\\",\\n        \\\"lastName\\\": \\\"CLEGANE\\\",\\n        \\\"dateOfBirth\\\": \\\"28/01/1990\\\",\\n        \\\"dateOfEmployment\\\": \\\"25/02/2000\\\"-\\n    }\\\"; line: 6, column: 42]\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Invalid parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "90f92ed8-5317-4d04-8b4e-6486158298ea",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"firstName\": \"GREGOR\",\n        \"middleInitial\": \"M\",\n        \"lastName\": \"CLEGANE\",\n        \"dateOfBirth\": \"28/01/1990\",\n        \"dateOfEmployment\": \"25/02/2000\",\n        \"statu\": \"ACTIVE\"\n    }"
+						},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees",
+								"eb36b784-3e07-4663-8778-e18304caf2ee"
+							]
+						},
+						"description": "The parameters must be provided as equal as the returned ones"
+					},
+					"response": [
+						{
+							"name": "Invalid parameter",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\n        \"firstName\": \"GREGOR\",\n        \"middleInitial\": \"M\",\n        \"lastName\": \"CLEGANE\",\n        \"dateOfBirth\": \"28/01/1990\",\n        \"dateOfEmployment\": \"25/02/2000\",\n        \"statu\": \"ACTIVE\"\n    }"
+								},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees",
+										"eb36b784-3e07-4663-8778-e18304caf2ee"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "650"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 16:58:34 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "2a5c3563-7e45-11e9-8c31-7b43377d5682"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aMpdEHHGoAMFq9g="
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce822ba-f408327493aff69216ce0522;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Error from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 80638a81b02ff4af7d1273bdef5e47ea.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "SpbjlR8DcJFlK16D53sn0A0wp2Qr_0mcO6i8-AfrZVS3Amx5ZFdNCQ=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized field \\\"statu\\\" (class com.angel.beans.Employee), not marked as ignorable (7 known properties: \\\"lastName\\\", \\\"status\\\", \\\"dateOfBirth\\\", \\\"id\\\", \\\"middleInitial\\\", \\\"dateOfEmployment\\\", \\\"firstName\\\"])\\n at [Source: (String)\\\"    {\\n        \\\"firstName\\\": \\\"GREGOR\\\",\\n        \\\"middleInitial\\\": \\\"M\\\",\\n        \\\"lastName\\\": \\\"CLEGANE\\\",\\n        \\\"dateOfBirth\\\": \\\"28/01/1990\\\",\\n        \\\"dateOfEmployment\\\": \\\"25/02/2000\\\",\\n        \\\"statu\\\": \\\"ACTIVE\\\"\\n    }\\\"; line: 7, column: 19] (through reference chain: com.angel.beans.Employee[\\\"statu\\\"])\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Existing employee, correct authorization",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "537daabc-3017-436e-aefe-6e24eb73cb50",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "A simple base64 user and password",
+								"key": "Authorization",
+								"type": "text",
+								"value": "Basic QWxhZGRpbjpPcGVuU2VzYW1l"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees",
+								"eb36b784-3e07-4663-8778-e18304caf2ee"
+							]
+						},
+						"description": "To be authorized to delete the employees you must provide the correct credentials (as on the example request)."
+					},
+					"response": [
+						{
+							"name": "Existing employee, correct authorization",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "A simple base64 user and password",
+										"key": "Authorization",
+										"type": "text",
+										"value": "Basic QWxhZGRpbjpPcGVuU2VzYW1l"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees",
+										"eb36b784-3e07-4663-8778-e18304caf2ee"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "88"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 19:03:50 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "aa84fc1c-7e56-11e9-964d-97af9928a0df"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aM7zgGp3oAMFxmw="
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce84016-dc897f8c13219658068b3ff4;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Miss from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 5fc5d2c46569dc26a5e3b49fee3b19a4.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "cPLUFR_o37IFunHkROrL6HRYt7uQkiUhntOpRsEdIYfPDniuaQyfww=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successful employee deletion with Id: eb36b784-3e07-4663-8778-e18304caf2ee\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Non existing employee, correct authorization",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "537daabc-3017-436e-aefe-6e24eb73cb50",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "A simple base64 user and password",
+								"key": "Authorization",
+								"type": "text",
+								"value": "Basic QWxhZGRpbjpPcGVuU2VzYW1l"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2e2",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees",
+								"eb36b784-3e07-4663-8778-e18304caf2e2"
+							]
+						},
+						"description": "To be authorized to delete the employees you must provide the correct credentials (as on the example request)."
+					},
+					"response": [
+						{
+							"name": "Non existing employee, correct authorization",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "A simple base64 user and password",
+										"key": "Authorization",
+										"type": "text",
+										"value": "Basic QWxhZGRpbjpPcGVuU2VzYW1l"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2e2",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees",
+										"eb36b784-3e07-4663-8778-e18304caf2e2"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "274"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 19:03:55 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "ad9c4eba-7e56-11e9-9c7d-11ae4316ef18"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aM70UHWZoAMF3Kw="
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce8401b-ef475dcd040f9b8800309057;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Error from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 5fc5d2c46569dc26a5e3b49fee3b19a4.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "tSW6MzRz0uj94HGE5QpGQBQTE4ddYjJ8-8zW-Lh2GKLwSUtoTths9A=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"com.amazonaws.services.dynamodbv2.model.ConditionalCheckFailedException: The conditional request failed (Service: AmazonDynamoDBv2; Status Code: 400; Error Code: ConditionalCheckFailedException; Request ID: T5TDS3JIH1F363MD0OOEFP979VVV4KQNSO5AEMVJF66Q9ASUAAJG)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Existing employee, invalid authorization",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "537daabc-3017-436e-aefe-6e24eb73cb50",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "A simple base64 user and password",
+								"key": "Authorization",
+								"type": "text",
+								"value": "Basic QWxhZGRpbjpPcGVuU2VzYW1lMQ=="
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees",
+								"eb36b784-3e07-4663-8778-e18304caf2ee"
+							]
+						},
+						"description": "To be authorized to delete the employees you must provide the correct credentials (as on the example request)."
+					},
+					"response": [
+						{
+							"name": "Existing employee, invalid authorization",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "A simple base64 user and password",
+										"key": "Authorization",
+										"type": "text",
+										"value": "Basic QWxhZGRpbjpPcGVuU2VzYW1lMQ=="
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees",
+										"eb36b784-3e07-4663-8778-e18304caf2ee"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 17:05:00 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "10c9778e-7e46-11e9-86f7-01ab34d0ed2a"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aMqZdEbooAMFkKw="
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce8243c-27abe88e680497dc45a7a030;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Error from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 80638a81b02ff4af7d1273bdef5e47ea.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "74cWgLIk3YsfNWxc7TViCNCbmJMTXp1nYCFfp3vLme__gMwP8NTtvg=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized to perform this action\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Non existing employee, invalid authorization",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "537daabc-3017-436e-aefe-6e24eb73cb50",
+								"exec": [
+									"pm.test(\"Response is ok\", function() {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "A simple base64 user and password",
+								"key": "Authorization",
+								"type": "text",
+								"value": "Basic QWxhZGRpbjpPcGVuU2VzYW1lMQ=="
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+							"protocol": "https",
+							"host": [
+								"1suc3jfv04",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"employees",
+								"eb36b784-3e07-4663-8778-e18304caf2ee"
+							]
+						},
+						"description": "To be authorized to delete the employees you must provide the correct credentials (as on the example request)."
+					},
+					"response": [
+						{
+							"name": "Non existing employee, invalid authorization",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "A simple base64 user and password",
+										"key": "Authorization",
+										"type": "text",
+										"value": "Basic QWxhZGRpbjpPcGVuU2VzYW1lMQ=="
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "https://1suc3jfv04.execute-api.us-east-1.amazonaws.com/Prod/employees/eb36b784-3e07-4663-8778-e18304caf2ee",
+									"protocol": "https",
+									"host": [
+										"1suc3jfv04",
+										"execute-api",
+										"us-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"Prod",
+										"employees",
+										"eb36b784-3e07-4663-8778-e18304caf2ee"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 May 2019 19:11:54 GMT"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "cb345659-7e57-11e9-93ff-ed82429f2251"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "aM8_LGH2oAMFRWw="
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-5ce841fa-a114e12e9878ed4551a09809;Sampled=0"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Error from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 a43b25e4690d3514ec42aed46c3e2f79.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "jXbTCnjtD7J20tPWyyzOaIaQNSibWUhapLPqi7VDWSFxu9YuNe7HsQ=="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized to perform this action\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The CREATE, UPDATE, DELETE and GET operations are organized under the employees resource, the appropiate http method designs the required action so.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6f001b9d-f9c3-4372-ac3f-0c6c10b052cd",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "04afb2fe-f0b7-4f62-893e-41f2b64b5130",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

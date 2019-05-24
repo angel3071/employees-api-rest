@@ -85,11 +85,11 @@ To get your own copy up and running follow these simple example steps.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* Tools
- - gradle
- - aws cli
+#### Tools
+- gradle
+- aws cli
 
-* S3 Bucket for code artifacts
+#### S3 Bucket for code artifacts
 ```sh
 aws s3 mb s3://{whetever-you-want-to-call-your-bucket}
 ```

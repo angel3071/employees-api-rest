@@ -45,45 +45,60 @@
 
 ![Architecture diagram](images/AWS-Lambda-and-DynamoDB-Architecture.png)
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
+There are always several different ways to solve a problem in this situation I
+see the oportunity and I take the risk, I hope you to like it.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
+The proposed solution to the requiriement was to develop a serverless
+implementation of the Employees api, all the specification on the request was
+accomplished and some other cool stuff was involved on the process.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue with the tag.
+Some reasons to choose a serverless approach:
+* Pricing!
+* Zero system administration
+* Scalable!
 
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+And with the Infraestructure as Code approach everything its super easy to move
+around, deploy and take care of the services configurationd and maintanence on
+the git respository itself.
+
 
 ### Built With
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+On a global point of view:
+* [API Gateway](https://aws.amazon.com/es/api-gateway/)
+* [AWS Lambda](https://aws.amazon.com/es/lambda/)
+* [DynamoDB](https://aws.amazon.com/es/dynamodb/)
+* [AWS CloudFormation](https://aws.amazon.com/es/cloudformation/)
 
+On the Code point of view:
+* [Java8]
+* [Gradle]
+* [aws sdk]
+* [Jackson]
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This api its ready for you to deploy it, you just need an aws account (obviously)
+To get your own copy up and running follow these simple example steps.
 
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
+* Tools
+ - gradle
+ - aws cli
+
+* S3 Bucket for code artifacts
 ```sh
-npm install npm@latest -g
+aws s3 mb s3://{whetever-you-want-to-call-your-bucket}
 ```
 
-### Installation
+### Deployment
 
-1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
 ```sh
-git clone https:://github.com/your_username_/Project-Name.git
+git clone https://github.com/angel3071/employees-api-rest
 ```
 3. Install NPM packages
 ```sh

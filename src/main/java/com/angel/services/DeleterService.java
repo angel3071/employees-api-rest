@@ -1,5 +1,6 @@
 package com.angel.services;
 
+import com.amazonaws.services.dynamodbv2.model.ConditionalCheckFailedException;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -69,9 +70,12 @@ public class DeleterService extends GeneralService implements RequestHandler<API
             response = createMessageResponse(200, String.format("Successful employee deletion with Id: %s", employeeId));
 
 
-        } catch (Exception e) {
+        } catch (ConditionalCheckFailedException e) {
+            response = createMessageResponse(404, "Employee not found");
+
+        }catch (Exception e) {
             //On the case of a internal server error
-            response = createMessageResponse(400, e.toString());
+            response = createMessageResponse(400, e.getMessage());
 
         }
         //The actual response to cloudwatch

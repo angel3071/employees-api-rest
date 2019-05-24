@@ -13,7 +13,7 @@ public interface Dao<T> {
      * @param id The Id to retreive the element
      * @return
      */
-    Optional<T> get(String id);
+    Optional<T> get(String id) throws IOException;
 
     /**
      * @return An arraylist of the elements found on db

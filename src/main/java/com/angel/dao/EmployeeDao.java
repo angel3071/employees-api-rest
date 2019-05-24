@@ -6,6 +6,7 @@ import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
 import com.amazonaws.services.dynamodbv2.document.utils.NameMap;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
+import com.amazonaws.services.dynamodbv2.model.ConditionalCheckFailedException;
 import com.amazonaws.services.dynamodbv2.model.ReturnValue;
 import com.angel.beans.Employee;
 import com.angel.constants.Constants;
@@ -31,18 +32,13 @@ public class EmployeeDao implements Dao<Employee> {
      * @return The actual employee representation for the employee searched
      */
     @Override
-    public Optional<Employee> get(String id) {
+    public Optional<Employee> get(String id) throws IOException {
         Item item = table.getItem(Constants.ID, id);
-        if (item.get(Constants.STATUS) == null || !Constants.STATUS_ACTIVE.equals(item.get(Constants.STATUS))) {
+        if (item == null ||  !Constants.STATUS_ACTIVE.equals(item.get(Constants.STATUS))) {
             return Optional.ofNullable(null);
         }
-        try {
-            Employee employee = mapper.readValue(item.toJSON(), Employee.class);
-            return Optional.ofNullable(employee);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return Optional.ofNullable(null);
+        Employee employee = mapper.readValue(item.toJSON(), Employee.class);
+        return Optional.ofNullable(employee);
     }
 
     /**
@@ -105,9 +101,10 @@ public class EmployeeDao implements Dao<Employee> {
      * @param id The key to perform the delete action on
      */
     @Override
-    public void delete(String id) {
+    public void delete(String id) throws ConditionalCheckFailedException {
         UpdateItemSpec updateItemSpec = new UpdateItemSpec()
                 .withPrimaryKey(Constants.ID, id)
+                .withConditionExpression("attribute_exists(id)")
                 .withUpdateExpression("set #st = :val1")
                 .withNameMap(new NameMap().with("#st", Constants.STATUS))
                 .withValueMap(new ValueMap().withString(":val1", Constants.STATUS_INACTIVE))

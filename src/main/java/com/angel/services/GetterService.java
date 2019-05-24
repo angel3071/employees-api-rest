@@ -18,7 +18,7 @@ import java.util.Optional;
 public class GetterService extends GeneralService implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
 
-    private static EmployeeDao edo;
+    private static EmployeeDao edao;
 
     /**
      * @param event   ApiGatewayProxyRequestEvent representation of the http request
@@ -44,15 +44,15 @@ public class GetterService extends GeneralService implements RequestHandler<APIG
             }
             logger.log("EmployeeId: " + employeeId);
 
-            edo = new EmployeeDao();
+            edao = new EmployeeDao();
             logger.log("Dao creation");
-            Employee employee = getEmployee(employeeId);
-            logger.log("getEmploye action");
-            if (employee != null) {
+            Optional<Employee> employee = edao.get(employeeId);
+            logger.log("GetEmploye action");
+            if (employee.isPresent()) {
                 response.setStatusCode(200);
-                response.setBody(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee));
+                response.setBody(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee.get()));
             } else {
-                response = createMessageResponse(400, "Employee not found");
+                response = createMessageResponse(404, "Employee not found");
             }
 
         } catch (Exception e) {
@@ -63,8 +63,4 @@ public class GetterService extends GeneralService implements RequestHandler<APIG
         return response;
     }
 
-    private static Employee getEmployee(String employeeId) {
-        Optional<Employee> employee = edo.get(employeeId);
-        return employee.orElseGet(null);
-    }
 }

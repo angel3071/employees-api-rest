@@ -60,7 +60,7 @@ public class UpdaterService extends GeneralService implements RequestHandler<API
             response = createMessageResponse(200, String.format("Successful employee update with Id: %s", employeeId));
 
         } catch (Exception e) {
-            response = createMessageResponse(400, e.toString());
+            response = createMessageResponse(400, e.getMessage());
         }
         logger.log(response.toString());
         return response;

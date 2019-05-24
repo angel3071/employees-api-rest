@@ -1,4 +1,3 @@
-
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: This stack implements the infrastructure for the Employees API
@@ -7,7 +6,7 @@ Resources:
     Type: Custom::Startup
     Properties:
       ServiceToken: !GetAtt StartupLambda.Arn
-      Dummy: 3
+      Dummy: 1
     DependsOn:
       - Employees
   # Lambda function for custom resource
@@ -41,11 +40,11 @@ Resources:
           TABLE_NAME: !Ref Employees
       Events:
         EmployeesBackend:
-           Type: Api
-           Properties:
-             RestApiId: !Ref EmployeesBackend
-             Path: /employees/{id}
-             Method: GET
+          Type: Api
+          Properties:
+            RestApiId: !Ref EmployeesBackend
+            Path: /employees/{id}
+            Method: GET
   GetEmployees:
     Type: AWS::Serverless::Function
     Properties:
@@ -76,7 +75,7 @@ Resources:
       Policies: AmazonDynamoDBFullAccess
       Environment:
         Variables:
-            TABLE_NAME: !Ref Employees
+          TABLE_NAME: !Ref Employees
       Events:
         EmployeesBackend:
           Type: Api
@@ -95,7 +94,7 @@ Resources:
       Policies: AmazonDynamoDBFullAccess
       Environment:
         Variables:
-            TABLE_NAME: !Ref Employees
+          TABLE_NAME: !Ref Employees
       Events:
         EmployeesBackend:
           Type: Api
@@ -122,9 +121,9 @@ Resources:
             RestApiId: !Ref EmployeesBackend
             Path: /employees/{id}
             Method: PUT
-  Employees: 
+  Employees:
     Type: AWS::Serverless::SimpleTable
-    Properties: 
+    Properties:
       TableName: Employees
       PrimaryKey:
         Name: id
